@@ -4,11 +4,8 @@ from lexicon.lexicon import LEXICON_RU
 
 
 router = Router()
-# Этот хэндлер будет срабатывать на любые ваши сообщения,
-# кроме команд "/start" и "/help"
+
+# Хэндлер для сообщений, которые не попали в другие хэндлеры
 @router.message()
-async def send_echo(message: Message):
-    try:
-        await message.answer(text="Я реагирую только на нажатие кнопок")
-    except TypeError:
-        await message.reply(text=LEXICON_RU['no_echo'])
+async def send_answer(message: Message):
+    await message.answer(text=LEXICON_RU['other_answer'])
